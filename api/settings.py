@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from config import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'restaurant',
+    'rest_framework'
+
 ]
 
 MIDDLEWARE = [
@@ -77,6 +81,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': env('DATABASE_NAME'),
+        # 'USER': env('DATABASE_USER'),
+        # 'PASSWORD': env('DATABASE_PASSWORD'),
+        # 'HOST': env('DATABASE_HOST'),
+        # 'PORT': env('DATABASE_PORT')
     }
 }
 
@@ -121,3 +131,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework_xml.parsers.XMLParser',
+        'rest_framework.parsers.JSONParser'
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework_xml.renderers.XMLRenderer',
+        'rest_framework.renderers.JSONRenderer'
+    ],
+}

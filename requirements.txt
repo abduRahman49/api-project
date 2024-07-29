@@ -3,3 +3,5 @@ markdown
 django-filter
 django
 django-environ
+psycopg2-binary
+djangorestframework-xml
